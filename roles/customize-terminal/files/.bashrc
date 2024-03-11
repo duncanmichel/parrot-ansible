@@ -9,6 +9,7 @@ case $- in
 esac
 
 export PATH=~/.local/bin:/snap/bin:/usr/sandbox/:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/usr/share/games:/usr/local/sbin:/usr/sbin:/sbin:/usr/share:/usr/share/john:$PATH
+export PATH=$PATH:/home/ph03nix0x90/go/bin/
 
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
