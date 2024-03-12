@@ -1,0 +1,13 @@
+---
+- name: "Kerbrute Repo Downlaod"
+  git:
+    repo: "https://github.com/ropnop/kerbrute"
+    dest: "/tmp/kerbrute"
+- name: "Building Kerbrute from source"
+  shell: |
+    cd /tmp/kerbrute
+    go build
+- name: "Moving kerbrute to bin"
+  copy:
+    src: "/tmp/kerbrute/kerbrute"
+    dest: "{{ ansible_env.HOME }}/.local/bin/"

@@ -1,0 +1,13 @@
+---
+- name: "httpx Repo Downlaod"
+  git:
+    repo: "https://github.com/projectdiscovery/httpx"
+    dest: "/tmp/httpx"
+- name: "Building httpx from source"
+  shell: |
+    cd /tmp/httpx
+    make
+- name: "Moving httpx to bin"
+  copy:
+    src: "/tmp/httpx/httpx"
+    dest: "{{ ansible_env.HOME }}/.local/bin/"

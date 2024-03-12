@@ -1,0 +1,20 @@
+---
+- name: "Upgrade Golang package"
+  shell: |
+    go install golang.org/dl/go1.21.0@latest
+    go1.21.0 download
+
+- name: "Deleting current go link"
+  file:
+    path: "/usr/bin/go"
+    state: absent
+  become: true
+  become_method: sudo
+
+- name: "Re-linking go to new binary"
+  file:
+    src: "{{ ansible_env.HOME }}/go/bin//go1.21.0"
+    dest: "/usr/bin/go"
+    state: hard
+  become: true
+  become_method: sudo
