@@ -1,0 +1,7 @@
+---
+- name: "Install rlwrap"
+  apt:
+    name: rlwrap
+    state: latest
+  become: true
+  become_method: sudo

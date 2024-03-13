@@ -1,0 +1,7 @@
+---
+- name: "Getting Linux Exploit Suggester"
+  get_url:
+    url: "https://raw.githubusercontent.com/mzet-/linux-exploit-suggester/master/linux-exploit-suggester.sh"
+    dest: "{{ ansible_env.HOME }}/.local/bin/les.sh"
+    mode: 0755
+    force: true

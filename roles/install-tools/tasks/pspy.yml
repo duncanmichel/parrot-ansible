@@ -1,0 +1,39 @@
+---
+- name: "Check if PSPY exists"
+  stat:
+    path: "/tmp/pspy"
+  register: pspy_dir
+
+- name: "Get PSPY repo"
+  git:
+    repo: "https://github.com/DominicBreuker/pspy"
+    dest: "/tmp/pspy"
+  when: pspy_dir.stat.islnk is not defined
+
+- name: "Ensure docker deamon is running"
+  service:
+    name: docker
+    state: started
+  become: true
+  become_method: sudo
+
+- name: "Build PSPY docker container"
+  shell: |
+    cd /tmp/pspy
+    docker build -f /tmp/pspy/docker/Dockerfile.build -t local/pspy-build:latest .
+  become: true
+  become_method: sudo
+  when: pspy_dir.stat.islnk is not defined
+
+- name: "Build docker"
+  shell: |
+    cd /tmp/pspy
+    make build
+  become: true
+  become_method: sudo
+  when: pspy_dir.stat.islnk is not defined
+
+- name: "Copying PSPY binaries to local bin"
+  copy:
+    src: "/tmp/pspy/bin/"
+    dest: "{{ ansible_env.HOME }}/.local/bin/"

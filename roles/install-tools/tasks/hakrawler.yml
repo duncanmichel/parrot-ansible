@@ -1,0 +1,24 @@
+---
+- name: "Check if Hakrawler exists"
+  stat:
+    path: "/tmp/hakrawler"
+  register: hakrawler_dir
+
+- name: "Hakrawler Repo Downlaod"
+  git:
+    repo: "https://github.com/hakluke/hakrawler"
+    dest: "/tmp/hakrawler"
+  when: hakrawler_dir.stat.islnk is not defined
+
+- name: "Building Hakrawler from source"
+  shell: |
+    cd /tmp/hakrawler
+    go build
+  when: hakrawler_dir.stat.islnk is not defined
+
+- name: "Moving Hakrawler to bin"
+  copy:
+    src: "/tmp/hakrawler/hakrawler"
+    dest: "{{ ansible_env.HOME }}/.local/bin/"
+    mode: 0755
+  when: hakrawler_dir.stat.islnk is not defined

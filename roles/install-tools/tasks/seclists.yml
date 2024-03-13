@@ -1,0 +1,14 @@
+---
+- name: "Check if seclists link exists"
+  stat:
+    path: "/usr/share/wordlists/seclists"
+  register: sec_lnk
+
+- name: "Link SecLists from opt to wordlists"
+  file:
+    src: "/opt/useful/SecLists"
+    dest: "/usr/share/wordlists/seclists"
+    state: link
+  become: true
+  become_method: sudo
+  when: sec_lnk.stat.islnk is not defined

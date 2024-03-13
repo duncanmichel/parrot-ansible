@@ -1,0 +1,6 @@
+---
+- name: "Update local file DB"
+  command:
+    cmd: updatedb
+  become: true
+  become_method: sudo

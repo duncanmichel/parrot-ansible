@@ -1,0 +1,9 @@
+---
+- name: "Install strace & ltrace"
+  apt:
+    name: 
+      - strace
+      - ltrace
+    state: latest
+  become: true
+  become_method: sudo

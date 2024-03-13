@@ -1,8 +1,14 @@
 ---
+- name: "Checking for latest go version"
+  stat:
+    path: "{{ ansible_env.HOME }}/go/bin//go1.21.0"
+  register: go_file
+
 - name: "Upgrade Golang package"
   shell: |
     go install golang.org/dl/go1.21.0@latest
-    go1.21.0 download
+    {{ ansible_env.HOME }}/go/bin//go1.21.0 download
+  when: go_file.stat.islnk is not defined
 
 - name: "Deleting current go link"
   file:
@@ -10,6 +16,7 @@
     state: absent
   become: true
   become_method: sudo
+  when: go_file.stat.islnk is not defined
 
 - name: "Re-linking go to new binary"
   file:
@@ -18,3 +25,4 @@
     state: hard
   become: true
   become_method: sudo
+  when: go_file.stat.islnk is not defined

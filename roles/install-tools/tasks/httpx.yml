@@ -11,3 +11,4 @@
   copy:
     src: "/tmp/httpx/httpx"
     dest: "{{ ansible_env.HOME }}/.local/bin/"
+    mode: 0755

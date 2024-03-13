@@ -1,13 +1,24 @@
 ---
+- name: "Check if Kerbrute exists"
+  stat:
+    path: "/tmp/kerbrute"
+  register: kerb_dir
+
 - name: "Kerbrute Repo Downlaod"
   git:
     repo: "https://github.com/ropnop/kerbrute"
     dest: "/tmp/kerbrute"
+  when: kerb_dir.stat.islnk is not defined
+
 - name: "Building Kerbrute from source"
   shell: |
     cd /tmp/kerbrute
     go build
+  when: kerb_dir.stat.islnk is not defined
+
 - name: "Moving kerbrute to bin"
   copy:
     src: "/tmp/kerbrute/kerbrute"
     dest: "{{ ansible_env.HOME }}/.local/bin/"
+    mode: 0755
+  when: kerb_dir.stat.islnk is not defined

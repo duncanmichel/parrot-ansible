@@ -3,6 +3,6 @@
   hosts: localhost
   connection: local
   roles:
-    - role: "roles/install-tools"
     - role: "roles/customize-terminal"
+    - role: "roles/install-tools"
     

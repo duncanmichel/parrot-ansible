@@ -1,0 +1,15 @@
+---
+- name: "Check if Enum4Linux-NG link exists"
+  stat:
+    path: "{{ ansible_env.HOME }}/.local/bin/enum4linux-ng"
+  register: enumlin_lnk
+  become: true
+  become_method: sudo
+
+- name: "Creating soft link to local bin"
+  file:
+    src: "/opt/enum4linux-ng/enum4linux-ng.py"
+    dest: "{{ ansible_env.HOME }}/.local/bin/enum4linux-ng"
+    state: link
+  when: enumlin_lnk.stat.islnk is not defined
+  

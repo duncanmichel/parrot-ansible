@@ -1,0 +1,7 @@
+---
+- name: "Pip3 install Windows Exploit Suggester"
+  pip:
+    name: wesng
+    executable: pip3
+  become: true
+  become_method: sudo

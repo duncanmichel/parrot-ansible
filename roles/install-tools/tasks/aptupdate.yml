@@ -1,0 +1,6 @@
+---
+- name: "Update apt repo"
+  apt:
+    update_cache: yes
+  become: true
+  become_method: sudo

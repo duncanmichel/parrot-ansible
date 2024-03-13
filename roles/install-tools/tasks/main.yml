@@ -1,4 +1,14 @@
 ---
+- include: aptupdate.yml
 - include: golang.yml
 - include: kerbrute.yml
-- include: httpx.yml
+#- include: httpx.yml
+- include: seclists.yml
+- include: trace.yml
+- include: rlwrap.yml
+- include: hakrawler.yml
+- include: enum4lin.yml
+- include: wesng.yml
+- include: les.yml
+#- include: pspy.yml
+- include: updatedb.yml
