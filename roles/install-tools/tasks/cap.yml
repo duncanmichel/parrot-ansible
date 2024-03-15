@@ -1,0 +1,15 @@
+---
+- name: "Set nmap capabilities"
+  capabilities:
+    path: "/usr/bin/nmap"
+    capability: "cap_net_raw,cap_net_admin,cap_net_bind_service+eip"
+    state: present
+  become: true
+  become_method: sudo
+- name: "Set python3 capabilities"
+  capabilities:
+    path: "/usr/bin/python3.9"
+    capability: "cap_net_bind_service=+ep"
+    state: present
+  become: true
+  become_method: sudo
