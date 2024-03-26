@@ -12,4 +12,3 @@
 - include: les.yml
 #- include: pspy.yml
 - include: updatedb.yml
-- include: cap.yml

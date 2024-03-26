@@ -1,0 +1,17 @@
+---
+- name: "Remove comments from medium wordlist"
+  lineinfile:
+    path: "/usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt"
+    regexp: "^#"
+    state: absent
+  become: true
+  become_method: sudo
+- name: "Remove comments from large wordlist"
+  lineinfile:
+    path: "/usr/share/wordlists/seclists/Discovery/Web-Content/directory-list-lowercase-2.3-big.txt"
+    regexp: "^#"
+    state: absent
+  become: true
+  become_method: sudo
+
+  
