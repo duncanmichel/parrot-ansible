@@ -11,6 +11,26 @@ esac
 export PATH=~/.local/bin:/snap/bin:/usr/sandbox/:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/usr/share/games:/usr/local/sbin:/usr/sbin:/sbin:/usr/share:/usr/share/john:$PATH
 export PATH=$PATH:/home/ph03nix0x90/go/bin/
 
+addsubdomain() {
+  # Check if at least one argument is provided
+  if [ $# -eq 0 ]; then
+    echo "[-] Error: Please provide an argument."
+    return 1
+  fi
+
+  # Check if $domain environment variable is set
+  if [ -z "$domain" ]; then
+    echo "[-] Error: \$domain environment variable is not set."
+    return 1
+  fi
+
+  # Construct the sed command to add the IP address after the domain
+  sed_cmd="s/($domain.*)/\1 $1/"
+
+  # Use sudo with -E flag to preserve environment variables
+  sudo -E sed -i -E "$sed_cmd" /etc/hosts  
+}
+
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
 HISTCONTROL=ignoreboth
