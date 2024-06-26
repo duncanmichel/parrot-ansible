@@ -6,9 +6,16 @@
     state: present
   become: true
   become_method: sudo
+- name: "Get python3 link target"
+  stat:
+    path: "/usr/bin/python3"
+    follow: no
+  register: py3_lnk
+  become: true
+  become_method: sudo
 - name: "Set python3 capabilities"
   capabilities:
-    path: "/usr/bin/python3.9"
+    path: "{{ py3_lnk.stat.lnk_source }}"
     capability: "cap_net_bind_service=+ep"
     state: present
   become: true

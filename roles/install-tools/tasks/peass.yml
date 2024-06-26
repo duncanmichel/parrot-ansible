@@ -1,0 +1,7 @@
+---
+- name: "Install PEAS Suite"
+  apt:
+    name: peass
+    state: latest
+  become: true
+  become_method: sudo

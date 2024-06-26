@@ -7,8 +7,9 @@
 - include: trace.yml
 - include: rlwrap.yml
 - include: hakrawler.yml
-- include: enum4lin.yml
-- include: wesng.yml
+- include: peass.yml
+#- include: enum4lin.yml #looks like included in recent version
+#- include: wesng.yml #problems getting PIP to work
 - include: les.yml
 #- include: pspy.yml
 - include: updatedb.yml
