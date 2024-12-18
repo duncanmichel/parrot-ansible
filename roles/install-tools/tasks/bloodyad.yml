@@ -1,0 +1,29 @@
+---
+- name: "Check if BloodyAD exists"
+  stat:
+    path: "/opt/bloodyAD"
+  register: bloody_dir
+- name: "Install python dependencies for BloodyAD"
+  apt:
+    name: 
+      - python3-msldap
+      - python3-asyauth
+    state: latest
+  become: true
+  become_method: sudo
+  when: bloody_dir.stat.exists is not defined
+- name: "Git clone BloodyAD"
+  git:
+    repo: "https://github.com/CravateRouge/bloodyAD.git"
+    dest: "/opt/bloodyAD"
+  become: true
+  become_method: sudo
+  when: bloody_dir.stat.exists is not defined
+- name: "Link BloodyAD to bin"
+  file:
+    src: "/opt/bloodyAD/bloodyAD.py"
+    dest: "/usr/local/bin/bloodyAD"
+    state: link
+  become: true
+  become_method: sudo
+  when: bloody_dir.stat.exists is not defined

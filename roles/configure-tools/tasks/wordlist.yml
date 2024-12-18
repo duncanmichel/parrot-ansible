@@ -13,5 +13,13 @@
     state: absent
   become: true
   become_method: sudo
-
-  
+- name: "Check if compressed rockyou exists"
+  stat:
+    path: "/usr/share/wordlists/rockyou.txt.gz"
+  register: rockoy_compressed
+- name: "Gunzip rockyou wordlist"
+  command:
+    cmd: "gunzip /usr/share/wordlists/rockyou.txt.gz"
+  become: true
+  become_method: sudo
+  when: rockoy_compressed.stat.exists is not defined

@@ -12,4 +12,5 @@
 #- import_tasks: wesng.yml #problems getting PIP to work
 - import_tasks: les.yml
 #- import_tasks: pspy.yml
+- import_tasks: bloodyad.yml
 - import_tasks: updatedb.yml
