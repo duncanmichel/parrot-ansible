@@ -22,4 +22,4 @@
     cmd: "gunzip /usr/share/wordlists/rockyou.txt.gz"
   become: true
   become_method: sudo
-  when: rockoy_compressed.stat.exists is not defined
+  when: rockoy_compressed.stat.exists is true

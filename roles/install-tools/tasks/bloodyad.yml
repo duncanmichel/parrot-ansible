@@ -11,14 +11,14 @@
     state: latest
   become: true
   become_method: sudo
-  when: bloody_dir.stat.exists is not defined
+  when: bloody_dir.stat.exists is false
 - name: "Git clone BloodyAD"
   git:
     repo: "https://github.com/CravateRouge/bloodyAD.git"
     dest: "/opt/bloodyAD"
   become: true
   become_method: sudo
-  when: bloody_dir.stat.exists is not defined
+  when: bloody_dir.stat.exists is false
 - name: "Link BloodyAD to bin"
   file:
     src: "/opt/bloodyAD/bloodyAD.py"
@@ -26,4 +26,4 @@
     state: link
   become: true
   become_method: sudo
-  when: bloody_dir.stat.exists is not defined
+  when: bloody_dir.stat.exists is false
