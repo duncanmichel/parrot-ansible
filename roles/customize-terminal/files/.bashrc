@@ -86,9 +86,6 @@ if [ -x /usr/bin/dircolors ]; then
     alias egrep='egrep --color=auto'
 fi
 
-# some more ls aliases
-alias ll='ls -alh'
-
 # Set 'man' colors
 if [ "$color_prompt" = yes ]; then
 	man() {

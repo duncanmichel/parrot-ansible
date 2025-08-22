@@ -3,23 +3,10 @@
   copy:
     src: "{{ role_path }}/files/.bashrc"
     dest: "{{ ansible_env.HOME }}"
-#- name: "Read current MATE terminal profiles"
-#  dconf: 
-#    key: "/org/mate/terminal/global/profile-list"
-#    state: read
-#  register: "dconf_profile_list"
-#- name: "Adding MATE profile"
-#  set_fact:
-#    new_profile_list: "{{ dconf_profile_list.value | regex_replace(\"]$\", \", 'pentest']\") }}"
-#- name: "Writing new MATE profile list"
-#  dconf:
-#    key: "/org/mate/terminal/global/profile-list"
-#    value: "{{ new_profile_list }}"
-#  when: "'pentest' not in dconf_profile_list.value"
-#- name: "Restoring MATE profile from dump"
-#  shell:
-#    cmd: "dconf load /org/mate/terminal/profiles/pentest/ < {{ role_path }}/files/profile.dump"
-#  when: "'pentest' not in dconf_profile_list"
+- name: "Copy Bash Aliases"
+  copy:
+    src: "{{ role_path }}/files/.bash_aliases"
+    dest: "{{ ansible_env.HOME }}"
 - name: "Restoring MATE profile to default from dump"
   shell:
     cmd: "dconf load /org/mate/terminal/profiles/default/ < {{ role_path }}/files/profile.dump"
