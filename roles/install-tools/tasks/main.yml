@@ -2,15 +2,16 @@
 - import_tasks: aptupdate.yml
 - import_tasks: golang.yml
 - import_tasks: kerbrute.yml
+- import_tasks: ligolo.yml
 #- import_tasks: httpx.yml
-- import_tasks: seclists.yml
+#- import_tasks: seclists.yml
 - import_tasks: trace.yml
 - import_tasks: rlwrap.yml
 - import_tasks: hakrawler.yml
 - import_tasks: peass.yml
-#- import_tasks: enum4lin.yml #looks like included in recent version
-#- import_tasks: wesng.yml #problems getting PIP to work
+- import_tasks: wesng.yml
 - import_tasks: les.yml
 #- import_tasks: pspy.yml
 - import_tasks: bloodyad.yml
+- import_tasks: winbins.yml
 - import_tasks: updatedb.yml

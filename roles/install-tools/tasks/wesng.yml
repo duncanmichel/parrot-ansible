@@ -1,7 +1,23 @@
 ---
-- name: "Pip3 install Windows Exploit Suggester"
-  pip:
-    name: wesng
-    executable: pip3
+- name: "Check if WES-NG exists"
+  stat:
+    path: "/opt/wesng"
+  register: wesng_dir
+- name: "WES-NG Repo Download"
+  git:
+    repo: "https://github.com/bitsadmin/wesng"
+    dest: "/opt/wesng"
   become: true
   become_method: sudo
+  when: wesng_dir.stat.islnk is not defined
+- name: "Link WES-NG from opt to local bin"
+  file:
+    src: "/opt/wesng/wes.py"
+    dest: "{{ ansible_env.HOME }}/.local/bin/wes"
+    state: link
+  when: wesng_dir.stat.islnk is not defined
+- name: "Updating WES-NG definitions"
+  shell: |
+    cd /opt/wesng/
+    wes.py -u
+  when: kerb_dir.stat.islnk is not defined

@@ -1,0 +1,24 @@
+---
+- name: "Check if Ligolo-ng exists"
+  stat:
+    path: "/tmp/ligolo-ng"
+  register: ligolo_dir
+
+- name: "Ligolo-ng Repo Download"
+  git:
+    repo: "https://github.com/nicocha30/ligolo-ng"
+    dest: "/tmp/ligolo-ng"
+  when: ligolo_dir.stat.islnk is not defined
+
+- name: "Building Ligolo-ng from source"
+  shell: |
+    cd /tmp/ligolo-ng
+    go build -o ligolo-proxy cmd/proxy/main.go
+  when: ligolo_dir.stat.islnk is not defined
+
+- name: "Moving Ligolo-ng to bin"
+  copy:
+    src: "/tmp/ligolo-ng/ligolo-proxy"
+    dest: "{{ ansible_env.HOME }}/.local/bin/"
+    mode: 0755
+  when: ligolo_dir.stat.islnk is not defined

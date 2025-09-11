@@ -1,0 +1,23 @@
+---
+- name: "Check if PowerSharpPack exists"
+  stat:
+    path: "/opt/PowerSharpPack"
+  register: pwrsharp_dir
+- name: "PowerSharpPack Repo Download"
+  git:
+    repo: "https://github.com/S3cur3Th1sSh1t/PowerSharpPack"
+    dest: "/opt/PowerSharpPack"
+  become: true
+  become_method: sudo
+  when: pwrsharp_dir.stat.islnk is not defined
+- name: "Check if SharpCollection exists"
+  stat:
+    path: "/opt/SharpCollection"
+  register: sharpcol_dir
+- name: "SharpCollection Repo Download"
+  git:
+    repo: "https://github.com/Flangvik/SharpCollection"
+    dest: "/opt/SharpCollection"
+  become: true
+  become_method: sudo
+  when: sharpcol_dir.stat.islnk is not defined

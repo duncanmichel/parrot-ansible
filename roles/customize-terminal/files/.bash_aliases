@@ -11,13 +11,26 @@ alias http='python3 -m http.server 8000'
 alias simplehttp='ifconfig tun0 | grep "inet "; python3 -m http.server'
 
 # Reverse Shell Listener function
-revshell() {
+linrevshell() {
     if [ -z $1 ]; then
-        echo "[-] Usage: revshell <port number>"
+        echo "[-] Usage: linrevshell <port number>"
         return 1
     fi
     if [[ "$1" =~ ^-?[0-9]+$ ]]; then
         ncat -lnvp $1
+    else
+        echo "[-] argument is not a number."
+    fi
+    
+}
+
+winrevshell() {
+    if [ -z $1 ]; then
+        echo "[-] Usage: winrevshell <port number>"
+        return 1
+    fi
+    if [[ "$1" =~ ^-?[0-9]+$ ]]; then
+        rlwrap ncat -lnvp $1
     else
         echo "[-] argument is not a number."
     fi
