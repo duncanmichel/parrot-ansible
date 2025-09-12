@@ -19,5 +19,5 @@
 - name: "Updating WES-NG definitions"
   shell: |
     cd /opt/wesng/
-    wes.py -u
+    ./wes.py -u
   when: kerb_dir.stat.islnk is not defined
