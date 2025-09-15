@@ -20,4 +20,6 @@
   shell: |
     cd /opt/wesng/
     ./wes.py -u
-  when: kerb_dir.stat.islnk is not defined
+  when: wesng_dir.stat.islnk is not defined
+  become: true
+  become_method: sudo
