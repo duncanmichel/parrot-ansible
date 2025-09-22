@@ -9,6 +9,7 @@ alias _i='sudo -i'
 # Convienence 
 alias http='python3 -m http.server 8000'
 alias simplehttp='ifconfig tun0 | grep "inet "; python3 -m http.server'
+alias log='script "/home/ph03nix0x90/tmux/tmux_history_$(date +%Y%m%d)_$(date +%s).log"'
 
 # Reverse Shell Listener function
 linrevshell() {
